@@ -4,7 +4,6 @@ module RSpec
   #module Core
     #module Formatters
 
-  #  
   class TapBaseFormatter < Core::Formatters::BaseFormatter
 
     # TAP-Y/J Revision
@@ -81,7 +80,9 @@ module RSpec
       super(example)
 
       file, line = example.location.split(':')
-      file = self.class.relative_path(file)
+      if RUBY_VERSION > '1.9'
+        file = self.class.relative_path(file)
+      end
       line = line.to_i
 
       doc = {
@@ -105,7 +106,7 @@ module RSpec
       }
 
       doc.update(captured_output)
-   
+
       return doc
     end
 
@@ -114,7 +115,9 @@ module RSpec
       super(example)
 
       file, line = example.location.split(':')
-      file = self.class.relative_path(file)
+      if RUBY_VERSION > '1.9'
+        file = self.class.relative_path(file)
+      end
       line = line.to_i
 
       doc = {
@@ -144,8 +147,9 @@ module RSpec
       super(example)
 
       file, line = example.location.split(':')
-
-      file = self.class.relative_path(file)
+      if RUBY_VERSION > '1.9'
+        file = self.class.relative_path(file)
+      end
       line = line.to_i
 
       if RSpec::Expectations::ExpectationNotMetError === example.exception
