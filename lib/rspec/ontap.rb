@@ -184,7 +184,7 @@ module RSpec
       if expected or returned
         doc.update(
           'expected' => expected,
-          'returned' => returned,
+          'returned' => returned
         )
       end
 
